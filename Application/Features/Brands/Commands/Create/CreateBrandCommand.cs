@@ -25,7 +25,6 @@ namespace Application.Features.Brands.Commands.Create
                 brand.Id = Guid.NewGuid();
 
                 Brand result = await _brandRepository.AddAsync(brand);
-
                 CreatedBrandResponse response = _mapper.Map<CreatedBrandResponse>(result);
 
                 return response;

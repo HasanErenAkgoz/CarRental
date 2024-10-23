@@ -11,7 +11,6 @@
     <Folder Include="Features\Brands\Commands\Update\" />
     <Folder Include="Features\Brands\Constants\" />
     <Folder Include="Features\Brands\Profiles\" />
-    <Folder Include="Features\Brands\Queryies\GetAll\" />
     <Folder Include="Features\Brands\Queryies\GetById\" />
     <Folder Include="Features\Brands\Rules\" />
     <Folder Include="Features\Models\Commands\" />
@@ -24,6 +23,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Core.Application">
+      <HintPath>..\Core.Packages\Core.Application\bin\Debug\net8.0\Core.Application.dll</HintPath>
+    </Reference>
     <Reference Include="Core.Domain">
       <HintPath>..\Core.Packages\Core.Persistence\bin\Debug\net8.0\Core.Domain.dll</HintPath>
     </Reference>
