@@ -25,6 +25,7 @@ namespace Application.Features.Brands.Queryies.GetAll
             public async Task<GetAllResponse<GetAllBrandListItemDto>> Handle(GetAllBrandQuery request, CancellationToken cancellationToken)
             {
                 Paginate<Brand> brands = await _brandRepository.GetListAsync(
+                    withDeleted:true,
                    index: request.PageRequest.PageIndex,
                    size: request.PageRequest.PageSize,
                    cancellationToken: cancellationToken);
