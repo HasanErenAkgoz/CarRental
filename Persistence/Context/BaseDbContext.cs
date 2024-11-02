@@ -6,19 +6,22 @@ namespace Persistence.Context
 {
     public class BaseDbContext : DbContext
     {
-        public BaseDbContext(DbContextOptions dbContextOptions,IConfiguration configuration):base(dbContextOptions)
+        public IConfiguration Configuration { get; set; }
+        public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
             Configuration = configuration;
-            Database.EnsureCreated();
         }
-
-        public IConfiguration Configuration { get; set; }
-        public DbSet<Brand>  Brands { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(modelBuilder);
         }
+        
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Fuel> Fuels { get; set; }
+        public DbSet<Transmission> Transmissions { get; set; }
+        public DbSet<Model> Models { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
+
     } 
 }

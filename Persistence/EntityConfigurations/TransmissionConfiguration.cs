@@ -1,22 +1,17 @@
-﻿using Domain.Entities;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.EntityConfigurations
 {
-    public class BrandConfiguration : IEntityTypeConfiguration<Brand>
+    public class TransmissionConfiguration : IEntityTypeConfiguration<Transmission>
     {
-        public void Configure(EntityTypeBuilder<Brand> builder)
+        public void Configure(EntityTypeBuilder<Transmission> builder)
         {
-            builder.ToTable("Brands").HasKey(b => b.Id);
+            builder.ToTable("Transmissions").HasKey(b => b.Id);
 
             builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
-            builder.Property(b => b.Name).HasColumnName("Name").HasMaxLength(50).IsRequired();
+            builder.Property(b => b.Type).HasColumnName("Type").HasMaxLength(50).IsRequired();
             builder.Property(b => b.CreatedUserID).HasColumnName("CreatedUserID").IsRequired();
             builder.Property(b => b.CreatedDate).HasColumnName("CreatedDate").IsRequired();
             builder.Property(b => b.LastUpdatedUserID).HasColumnName("LastUpdatedUserID").IsRequired();
@@ -24,9 +19,9 @@ namespace Persistence.EntityConfigurations
             builder.Property(b => b.DeletedDate).HasColumnName("DeletedDate");
             builder.Property(b => b.IsDeleted).HasColumnName("IsDeleted").IsRequired();
             builder.Property(b => b.Status).HasColumnName("Status").IsRequired();
-            
-            builder.HasIndex(indexExpression: b => b.Name).IsUnique();
-            builder.HasMany(b => b.Models);
+
+            builder.HasIndex(indexExpression: b => b.Type).IsUnique();
+            builder.HasMany(f => f.Cars).WithOne(c => c.Transmission).HasForeignKey(c => c.TransmissionId);
             builder.HasQueryFilter(b => !b.DeletedDate.HasValue && !b.IsDeleted);
         }
     }

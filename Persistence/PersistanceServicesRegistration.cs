@@ -11,9 +11,8 @@ namespace Persistence
     {
         public static IServiceCollection AddPersistanceServices(this IServiceCollection  services,IConfiguration configuration)
         {
-            services.AddDbContext<BaseDbContext>(options => options.UseInMemoryDatabase("nArchitecture"));
+            services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("CarRentalDB")));
             services.AddScoped<IBrandRepository, BrandRepository>();
-
             return services;
         }
     }
