@@ -1,5 +1,9 @@
-﻿using System.Linq.Dynamic.Core;
+﻿﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Core.Persistence.Dynamic;
 
@@ -92,13 +96,13 @@ public static class IQueryableDynamicFilterExtensions
         if (!string.IsNullOrEmpty(filter.Value))
         {
             if (filter.Operator == "doesnotcontain")
-                where.Append($"(!np({filter.Field}).{comparison}(@{index}))");
-            else if (comparison == "StartsWith" || comparison == "EndsWith" || comparison == "Contains")
-                where.Append($"(np({filter.Field}).{comparison}(@{index}))");
+                where.Append($"(!np({filter.Field}).{comparison}(@{index.ToString()}))");
+            else if (comparison is "StartsWith" or "EndsWith" or "Contains")
+                where.Append($"(np({filter.Field}).{comparison}(@{index.ToString()}))");
             else
-                where.Append($"np({filter.Field}) {comparison} @{index}");
+                where.Append($"np({filter.Field}) {comparison} @{index.ToString()}");
         }
-        else if (filter.Operator == "isnull" || filter.Operator == "isnotnull")
+        else if (filter.Operator is "isnull" or "isnotnull")
         {
             where.Append($"np({filter.Field}) {comparison}");
         }

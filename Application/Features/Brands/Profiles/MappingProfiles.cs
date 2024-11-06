@@ -13,8 +13,6 @@ namespace Application.Features.Brands.Profiles
     public class MappingProfiles : Profile
     {
         public MappingProfiles() {
-
-
             //Create
             CreateMap<Brand, CreateBrandCommand>().ReverseMap();
             CreateMap<Brand, CreatedBrandResponse>().ReverseMap();
@@ -30,7 +28,6 @@ namespace Application.Features.Brands.Profiles
             //GetAll
             CreateMap<Brand, GetAllBrandListItemDto>().ReverseMap();
             CreateMap<Paginate<Brand>, GetAllResponse<GetAllBrandListItemDto>>().ReverseMap();
-
             //GetById
             CreateMap<Brand, GetByIdBrandResponse>().ReverseMap();
 

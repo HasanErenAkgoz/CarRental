@@ -15,6 +15,8 @@ namespace Core.Application.Responses
         { 
             get => _Items??= new List<T>();
             set => _Items=value;
+            
+            
         }
     }
 }
