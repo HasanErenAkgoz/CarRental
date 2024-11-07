@@ -14,4 +14,6 @@ public abstract class ExceptionHandler
     
         protected abstract Task HandleException(BusinessException buinessException);
         protected abstract Task HandleException(Exception exception);
+        protected abstract Task HandleException(ValidationException validationException);
+        
 }

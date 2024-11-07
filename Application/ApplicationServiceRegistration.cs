@@ -1,11 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using Core.Application.Pipelines.Validation;
 using Core.Application.Rules;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
 {
@@ -15,9 +12,12 @@ namespace Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(configuration =>
             {
                 configuration.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+                
+                configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
             });
 
             return services;

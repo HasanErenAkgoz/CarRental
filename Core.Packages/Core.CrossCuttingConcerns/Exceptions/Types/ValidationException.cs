@@ -36,3 +36,9 @@ public class ValidationException:Exception
         return $"Validation failed: {string.Join(string.Empty, arr)}";
     }
 }
+
+public class ValidationExceptionModel
+{
+    public string? Property { get; set; }
+    public IEnumerable<string>? Errors { get; set; }
+}
