@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Validation;
 using Core.Application.Rules;
 using Core.Application.Transaction;
@@ -17,9 +18,10 @@ namespace Application
             services.AddMediatR(configuration =>
             {
                 configuration.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
-                
+
                 configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
                 configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
+                configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
             });
 
             return services;
