@@ -12,9 +12,11 @@ namespace Application.Features.Brands.Queryies.GetAll
     public class GetAllBrandQuery : IRequest<GetAllResponse<GetAllBrandListItemDto>>, ICachableRequest
     {
         public PageRequest PageRequest { get; set; }
-        public string CacheKey => $"GetAllBrandQuery({PageRequest.PageIndex},{PageRequest.PageSize})";
-        public bool BypassCache {get;}
+
+        public string CacheKey => $"GetListBrandQuery({PageRequest.PageIndex},{PageRequest.PageSize})";
+        public bool BypassCache => false;
         public TimeSpan? SlidingExpiration { get; }
+        public string? CacheGroupKey => "GetBrands";
         public class GetAllBrandQueryHandler : IRequestHandler<GetAllBrandQuery, GetAllResponse<GetAllBrandListItemDto>>
         {
             private readonly IBrandRepository _brandRepository;
