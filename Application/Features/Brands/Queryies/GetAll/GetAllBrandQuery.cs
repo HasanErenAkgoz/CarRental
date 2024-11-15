@@ -1,6 +1,7 @@
 ﻿using Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
 using Core.Application.Request;
 using Core.Application.Responses;
 using Core.Persistence.Paging;
@@ -9,7 +10,7 @@ using MediatR;
 
 namespace Application.Features.Brands.Queryies.GetAll
 {
-    public class GetAllBrandQuery : IRequest<GetAllResponse<GetAllBrandListItemDto>>, ICachableRequest
+    public class GetAllBrandQuery : IRequest<GetAllResponse<GetAllBrandListItemDto>>, ICachableRequest,ILoggableRequest
     {
         public PageRequest PageRequest { get; set; }
 

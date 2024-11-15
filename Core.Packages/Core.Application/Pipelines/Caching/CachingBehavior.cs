@@ -52,15 +52,7 @@ public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         DistributedCacheEntryOptions cacheOptions = new() { SlidingExpiration = slidingExpiration };
 
         byte[] serializedData = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(response));
-
         await _distributedCache.SetAsync(request.CacheKey, serializedData, cacheOptions, cancellationToken);
-        _logger.LogInformation($"Added to Cache -> {request.CacheKey}");
-
-        if (request.CacheGroupKey !=null)
-        {
-            await addCacheKeyToGroup(request,slidingExpiration,cancellationToken);
-        }
-
         return response;
     }
 
